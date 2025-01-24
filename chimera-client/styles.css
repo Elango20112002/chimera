@@ -1,0 +1,17 @@
+/* styles.css */
+.active {
+    background-color: #007bff !important;
+    color: white;
+  }
+  
+  .submit-form {
+    max-width: 400px;
+    margin-bottom: 20px;
+  }
+  
+  .list .col-md-12,
+  .list .col-md-6,
+  .list .col-md-8 {
+    margin-top: 20px;
+  }
+  

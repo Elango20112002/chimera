@@ -1,0 +1,35 @@
+<div class="list row">
+    <div class="col-md-12">
+      <h4>Students List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let s of students; let i = index"
+          (click)="setActiveStudent(s, i)"
+          [class.active]="i === currentIndex"
+        >
+          {{ s.name }}
+        </li>
+      </ul>
+      <button class="m-3 btn btn-sm btn-primary" (click)="retrieveStudents()">
+        Refresh
+      </button>
+    </div>
+  
+    <div class="col-md-12" *ngIf="currentStudent">
+      <hr />
+      <h4>Student Details</h4>
+      <div>
+        <strong>Name:</strong> {{ currentStudent.name }}
+      </div>
+      <div>
+        <strong>Courses:</strong>
+        <ul>
+          <li *ngFor="let c of currentStudent.courses">
+            {{ c.title }} ({{ c.description }})
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

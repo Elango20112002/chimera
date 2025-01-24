@@ -1,0 +1,41 @@
+<div class="submit-form">
+  <h4>Add Student</h4>
+  <div *ngIf="!submitted">
+    <!-- Student Name -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        required
+        [(ngModel)]="student.name"
+        name="name"
+      />
+    </div>
+
+    <!-- Multi-Select for Courses -->
+    <div class="form-group">
+      <label for="courses">Select Courses</label>
+      <select
+        class="form-control"
+        id="courses"
+        [(ngModel)]="student.courses"
+        multiple
+        name="courses"
+      >
+        <option *ngFor="let course of courses" [value]="course.id">
+          {{ course.title }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <button (click)="saveStudent()" class="btn btn-success">Submit</button>
+  </div>
+
+  <div *ngIf="submitted">
+    <h4>You submitted successfully!</h4>
+    <button class="btn btn-success" (click)="newStudent()">Add Another</button>
+  </div>
+</div>

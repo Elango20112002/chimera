@@ -1,0 +1,50 @@
+<div class="row">
+    <!-- Add Course Form -->
+    <div class="col-md-4">
+      <h4>Add Course</h4>
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="newCourse.title"
+            name="title"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            [(ngModel)]="newCourse.description"
+            name="description"
+            required
+          />
+        </div>
+        <button (click)="saveCourse()" class="btn btn-success">Submit</button>
+      </div>
+  
+      <div *ngIf="submitted" class="mt-2">
+        <p>Course added successfully!</p>
+        <button class="btn btn-primary" (click)="newForm()">Add Another</button>
+      </div>
+    </div>
+  
+    <!-- Courses List -->
+    <div class="col-md-8">
+      <h4>Courses List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let c of coursesList"
+        >
+          {{ c.title }} - {{ c.description }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  

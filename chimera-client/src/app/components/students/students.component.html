@@ -1,0 +1,68 @@
+<div class="row">
+  <!-- Add Student Form -->
+  <div class="col-md-4">
+    <h4>Add Student</h4>
+    <div *ngIf="!submitted">
+      <!-- Student Name -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          required
+          [(ngModel)]="newStudent.name"
+          name="name"
+        />
+      </div>
+
+      <!-- Multi-Select Courses -->
+      <div class="form-group">
+        <label for="courses">Select Courses</label>
+        <select
+          class="form-control"
+          id="courses"
+          [(ngModel)]="newStudent.courses"
+          multiple
+          name="courses"
+        >
+          <option *ngFor="let course of allCourses" [ngValue]="course.id">
+            {{ course.title }}
+          </option>
+        </select>
+      </div>
+
+      <button (click)="saveStudent()" class="btn btn-success">Submit</button>
+    </div>
+
+    <div *ngIf="submitted" class="mt-2">
+      <p>Student added successfully!</p>
+      <button class="btn btn-primary" (click)="newForm()">Add Another</button>
+    </div>
+  </div>
+
+  <!-- Students List -->
+  <div class="col-md-8">
+    <h4>Students List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let s of students; let i = index"
+        (click)="setActiveStudent(s, i)"
+        [class.active]="i === currentIndex"
+      >
+        {{ s.name }}
+      </li>
+    </ul>
+    <div *ngIf="currentStudent" class="mt-3">
+      <h5>Selected Student</h5>
+      <p><strong>Name:</strong> {{ currentStudent.name }}</p>
+      <p><strong>Courses:</strong></p>
+      <ul>
+        <li *ngFor="let c of currentStudent.courses">
+          {{ c.title }} ({{ c.description }})
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

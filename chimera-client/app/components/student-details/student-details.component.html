@@ -1,0 +1,59 @@
+<div *ngIf="currentStudent" class="edit-form">
+  <h4>Student</h4>
+  <form>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        [(ngModel)]="currentStudent.title"
+        name="title"
+      />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input
+        type="text"
+        class="form-control"
+        id="description"
+        [(ngModel)]="currentStudent.description"
+        name="description"
+      />
+    </div>
+
+    <div class="form-group">
+      <label><strong>Status:</strong></label>
+      {{ currentStudent.published ? "Published" : "Pending" }}
+    </div>
+  </form>
+
+  <button
+    class="badge badge-primary mr-2"
+    *ngIf="currentStudent.published"
+    (click)="updatePublished(false)"
+  >
+    UnPublish
+  </button>
+  <button
+    *ngIf="!currentStudent.published"
+    class="badge badge-primary mr-2"
+    (click)="updatePublished(true)"
+  >
+    Publish
+  </button>
+
+  <button class="badge badge-danger mr-2" (click)="deleteStudent()">
+    Delete
+  </button>
+
+  <button type="submit" class="badge badge-success" (click)="updateStudent()">
+    Update
+  </button>
+  <p>{{ message }}</p>
+</div>
+
+<div *ngIf="!currentStudent">
+  <br />
+  <p>Cannot access this Student...</p>
+</div>
