@@ -17,7 +17,6 @@ public class Course {
     private String title;
     private String description;
 
-    // mappedBy should match the field name in Student.java
     @JsonIgnore
     @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
     private Set<Student> students = new HashSet<>();
@@ -29,7 +28,6 @@ public class Course {
         this.description = description;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

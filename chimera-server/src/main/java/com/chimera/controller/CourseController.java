@@ -15,25 +15,25 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    // GET all courses
+
     @GetMapping
     public List<Course> getAllCourses() {
         return courseService.getAllCourses();
     }
 
-    // GET single course by ID
+
     @GetMapping("/{id}")
     public Course getCourseById(@PathVariable Long id) {
         return courseService.getCourse(id);
     }
 
-    // CREATE course
+
     @PostMapping
     public Course createCourse(@RequestBody Course course) {
         return courseService.saveCourse(course);
     }
 
-    // UPDATE course
+
     @PutMapping("/{id}")
     public Course updateCourse(@PathVariable Long id, @RequestBody Course courseDetails) {
         Course existingCourse = courseService.getCourse(id);
@@ -45,7 +45,7 @@ public class CourseController {
         return courseService.saveCourse(existingCourse);
     }
 
-    // DELETE course
+
     @DeleteMapping("/{id}")
     public void deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);

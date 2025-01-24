@@ -17,7 +17,7 @@ public class Student {
 
 	private String name;
 
-	// Many-to-Many relationship
+
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "student_courses",
@@ -31,7 +31,7 @@ public class Student {
 		this.name = name;
 	}
 
-	// Getters and Setters
+
 	public Long getId() {
 		return id;
 	}

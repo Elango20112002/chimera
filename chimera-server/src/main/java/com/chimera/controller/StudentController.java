@@ -22,22 +22,22 @@ public class StudentController {
 	@Autowired
 	private CourseService courseService;
 
-	// GET all students
+
 	@GetMapping
 	public List<Student> getAllStudents() {
 		return studentService.getAllStudents();
 	}
 
-	// GET single student by ID
+
 	@GetMapping("/{id}")
 	public Student getStudentById(@PathVariable Long id) {
 		return studentService.getStudent(id);
 	}
 
-	// CREATE student (with courses)
+
 	@PostMapping
 	public Student createStudent(@RequestBody Student student) {
-		// If the student has courses with IDs, retrieve them from DB
+
 		Set<Course> courses = new HashSet<>();
 		if (student.getCourses() != null) {
 			for (Course c : student.getCourses()) {
@@ -51,7 +51,6 @@ public class StudentController {
 		return studentService.saveStudent(student);
 	}
 
-	// UPDATE student
 	@PutMapping("/{id}")
 	public Student updateStudent(@PathVariable Long id, @RequestBody Student studentDetails) {
 		Student existingStudent = studentService.getStudent(id);
@@ -60,7 +59,7 @@ public class StudentController {
 		}
 		existingStudent.setName(studentDetails.getName());
 
-		// Update courses
+
 		Set<Course> updatedCourses = new HashSet<>();
 		if (studentDetails.getCourses() != null) {
 			for (Course c : studentDetails.getCourses()) {
@@ -75,7 +74,6 @@ public class StudentController {
 		return studentService.saveStudent(existingStudent);
 	}
 
-	// DELETE student
 	@DeleteMapping("/{id}")
 	public void deleteStudent(@PathVariable Long id) {
 		studentService.deleteStudent(id);
