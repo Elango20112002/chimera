@@ -8,13 +8,7 @@ import { StudentsListComponent } from './components/students-list/students-list.
 import { CoursesComponent } from './components/courses/courses.component';
 import { StudentsComponent } from './components/students/students.component';
 
-// const routes: Routes = [
-//   { path: '', redirectTo: 'students', pathMatch: 'full' },
-//   { path: 'students', component: StudentsListComponent },
-//   { path: 'add-student', component: AddStudentComponent },
-//   { path: 'courses', component: CoursesListComponent },
-//   { path: 'add-course', component: AddCourseComponent },
-// ];
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'students', pathMatch: 'full' },

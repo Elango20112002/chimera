@@ -64,7 +64,7 @@ export class StudentsComponent implements OnInit {
     // Convert the selected course IDs into objects if your backend requires:
     const payload = {
       name: this.newStudent.name,
-      courses: this.newStudent.courses.map((courseId) => ({ id: courseId }))
+      courseIds: this.newStudent.courses
     };
 
     this.studentService.create(payload).subscribe(

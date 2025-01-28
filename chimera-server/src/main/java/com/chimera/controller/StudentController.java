@@ -1,5 +1,6 @@
 package com.chimera.controller;
 
+import com.chimera.dto.StudentRequestDto;
 import com.chimera.model.Course;
 import com.chimera.model.Student;
 import com.chimera.service.CourseService;
@@ -16,66 +17,56 @@ import java.util.Set;
 @CrossOrigin(origins = "*") // Allow requests from frontend
 public class StudentController {
 
-	@Autowired
-	private StudentService studentService;
+    @Autowired
+    private StudentService studentService;
 
-	@Autowired
-	private CourseService courseService;
-
-
-	@GetMapping
-	public List<Student> getAllStudents() {
-		return studentService.getAllStudents();
-	}
+    @Autowired
+    private CourseService courseService;
 
 
-	@GetMapping("/{id}")
-	public Student getStudentById(@PathVariable Long id) {
-		return studentService.getStudent(id);
-	}
+    @GetMapping
+    public Set<StudentRequestDto>  getAllStudents() {
+        return studentService.getAllStudents();
+    }
 
 
-	@PostMapping
-	public Student createStudent(@RequestBody Student student) {
-
-		Set<Course> courses = new HashSet<>();
-		if (student.getCourses() != null) {
-			for (Course c : student.getCourses()) {
-				Course course = courseService.getCourse(c.getId());
-				if (course != null) {
-					courses.add(course);
-				}
-			}
-		}
-		student.setCourses(courses);
-		return studentService.saveStudent(student);
-	}
-
-	@PutMapping("/{id}")
-	public Student updateStudent(@PathVariable Long id, @RequestBody Student studentDetails) {
-		Student existingStudent = studentService.getStudent(id);
-		if (existingStudent == null) {
-			return null;
-		}
-		existingStudent.setName(studentDetails.getName());
+    @GetMapping("/{id}")
+    public Student getStudentById(@PathVariable Long id) {
+        return studentService.getStudent(id);
+    }
 
 
-		Set<Course> updatedCourses = new HashSet<>();
-		if (studentDetails.getCourses() != null) {
-			for (Course c : studentDetails.getCourses()) {
-				Course course = courseService.getCourse(c.getId());
-				if (course != null) {
-					updatedCourses.add(course);
-				}
-			}
-		}
-		existingStudent.setCourses(updatedCourses);
+    @PostMapping
+    public Student createStudent(@RequestBody StudentRequestDto studentRequestDto) {
 
-		return studentService.saveStudent(existingStudent);
-	}
+        return studentService.saveStudent(studentRequestDto);
+    }
 
-	@DeleteMapping("/{id}")
-	public void deleteStudent(@PathVariable Long id) {
-		studentService.deleteStudent(id);
-	}
+   // @PutMapping("/{id}")
+   // public Student updateStudent(@PathVariable Long id, @RequestBody Student studentDetails) {
+//        Student existingStudent = studentService.getStudent(id);
+//        if (existingStudent == null) {
+//            return null;
+//        }
+//        existingStudent.setName(studentDetails.getName());
+//
+//
+//        Set<Course> updatedCourses = new HashSet<>();
+//        if (studentDetails.getCourses() != null) {
+//            for (Course c : studentDetails.getCourses()) {
+//                Course course = courseService.getCourse(c.getId());
+//                if (course != null) {
+//                    updatedCourses.add(course);
+//                }
+//            }
+//        }
+//        existingStudent.setCourses(updatedCourses);
+//
+//        return studentService.saveStudent(existingStudent);
+   // }
+
+    @DeleteMapping("/{id}")
+    public void deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
+    }
 }

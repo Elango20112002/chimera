@@ -57,12 +57,32 @@
     <div *ngIf="currentStudent" class="mt-3">
       <h5>Selected Student</h5>
       <p><strong>Name:</strong> {{ currentStudent.name }}</p>
-      <p><strong>Courses:</strong></p>
-      <ul>
-        <li *ngFor="let c of currentStudent.courses">
-          {{ c.title }} ({{ c.description }})
-        </li>
-      </ul>
+      <p><strong>Courses:</strong>
+        <!-- {{currentStudent.mappedCourses}} -->
+      </p>
+      <div *ngIf="currentStudent && currentStudent.mappedCourses.length > 0; else noCourses">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Course ID</th>
+              <th>Course Title</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of currentStudent.mappedCourses">
+              <td>{{ c.id }}</td>
+              <td>{{ c.title }}</td>
+              <td>{{ c.description }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <ng-template #noCourses>
+        <p>No courses available for this student.</p>
+      </ng-template>
+      
     </div>
   </div>
 </div>
